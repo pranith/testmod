@@ -1,3 +1,10 @@
+/*
+ * test.c: A sample module to test small pieces of kernel code
+ *
+ * Author: Pranith Kumar <bobby.prani@gmail.com>
+ * License: GPLv2+
+ */
+
 #include <linux/module.h>
 #include <linux/init.h>
 
