@@ -7,19 +7,22 @@
 
 #include <linux/module.h>
 #include <linux/init.h>
+#include <linux/atomic.h>
+
+int val = 0;
 
 static int __init test_init(void)
 {
-	atomic_t i = ATOMIC_INIT(0);
+	atomic_t i = ATOMIC_INIT(1);
 	pr_info("Loading test module\n");
 
 	smp_mb__before_atomic();
-	atomic_inc(&i);
+	val = atomic_read(&i);
 	smp_mb__after_atomic();
 
-	atomic_add_return(1, &i);
+	//val = atomic_add_return(0, &i);
 	
-	pr_info("val is %d\n", atomic_read(&i));
+	pr_info("val is %d\n", val);
 
 	return 0;
 }
